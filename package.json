@@ -1,0 +1,29 @@
+{
+	"name": "docker-dashboard",
+	"version": "1.0.0",
+	"description": "Node package that creates a dashboard UI for your Docker environment",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/aukai84/docker-dashboard.git"
+	},
+	"keywords": [
+		"Node",
+		"Docker",
+		"React",
+		"Express",
+		"Bootstrap"
+	],
+	"author": "Aukai Tirrell",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/aukai84/docker-dashboard/issues"
+	},
+	"homepage": "https://github.com/aukai84/docker-dashboard#readme",
+	"bin": {
+		"say-hello": "./cli.js"
+	}
+}
