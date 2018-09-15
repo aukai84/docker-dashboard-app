@@ -1,10 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-const App = () => {
-	return (
-		<div>
-			<h1>Hello Parcel</h1>
-		</div>
-	);
-};
+import App from './containers/App.js';
+
 render(<App />, document.getElementById('app'));
