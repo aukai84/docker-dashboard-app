@@ -1,31 +1,33 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from 'react';
+import TopNav from '../components/navigation/topNav.js';
+import axios from 'axios';
 
 class App extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            containers: []
-        }
+            containers: [],
+        };
     }
     componentDidMount() {
-        axios.get('unix:///var/run/docker.sock/containers/json').then(res => {
-            console.log(res)
+        axios.get('unix:///var/run/docker.sock/containers/json').then((res) => {
+            console.log(res);
             this.setState({
-                containers: res.data
-            })
-        })
+                containers: res.data,
+            });
+        });
     }
     render() {
         return (
             <div>
+                <TopNav />
                 <h1>Docker-Dashboard Test</h1>
-                {this.state.containers.map(container => (
+                {this.state.containers.map((container) => (
                     <div>{container.Image}</div>
                 ))}
             </div>
-        )
+        );
     }
 }
 
-export default App
+export default App;
