@@ -1,6 +1,6 @@
 {
 	"name": "docker-dashboard-app",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Node package that creates a dashboard UI for your Docker environment",
 	"main": "index.js",
 	"scripts": {
@@ -14,13 +14,7 @@
 		"type": "git",
 		"url": "git+https://github.com/aukai84/docker-dashboard.git"
 	},
-	"keywords": [
-		"Node",
-		"Docker",
-		"React",
-		"Express",
-		"Bootstrap"
-	],
+	"keywords": ["Node", "Docker", "React", "Express", "Material Design Lite", "Material Design"],
 	"author": "Aukai Tirrell",
 	"license": "MIT",
 	"bugs": {
