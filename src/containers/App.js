@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react'
+import axios from 'axios'
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			containers: []
-		};
-	}
-	componentDidMount() {
-		axios.get('http://localhost:2375/containers/json').then(res => {
-			console.log(res);
-			this.setState({
-				containers: res.data
-			});
-		});
-	}
-	render() {
-		return <div>{this.state.containers.map(container => <div>{container.Image}</div>)}</div>;
-	}
+    constructor(props) {
+        super(props)
+        this.state = {
+            containers: []
+        }
+    }
+    componentDidMount() {
+        axios.get('unix:///var/run/docker.sock/containers/json').then(res => {
+            console.log(res)
+            this.setState({
+                containers: res.data
+            })
+        })
+    }
+    render() {
+        return (
+            <div>
+                <h1>Docker-Dashboard Test</h1>
+                {this.state.containers.map(container => (
+                    <div>{container.Image}</div>
+                ))}
+            </div>
+        )
+    }
 }
 
-export default App;
+export default App
