@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "parcel ./src/index.html",
-        "build": "bin/cli.js build ./src/index.html",
+        "build": "node node_modules/.bin/parcel build ./src/index.html",
         "install": "npm run build",
         "docker-dashboard": "node node_modules/http-server/bin/http-server -p 8000 dist -d"
     },
