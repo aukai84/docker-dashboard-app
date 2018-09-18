@@ -27,7 +27,7 @@ class TopNav extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="title" color="inherit" noWrap>
-                            Docker-Dashboard
+                            Docker-Dashboard Search
                         </Typography>
                     </Toolbar>
                 </AppBar>
