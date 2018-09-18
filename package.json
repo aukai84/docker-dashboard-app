@@ -15,7 +15,14 @@
 		"type": "git",
 		"url": "git+https://github.com/aukai84/docker-dashboard.git"
 	},
-	"keywords": ["Node", "Docker", "React", "Express", "Material Design Lite", "Material Design"],
+	"keywords": [
+		"Node",
+		"Docker",
+		"React",
+		"Express",
+		"Material Design Lite",
+		"Material Design"
+	],
 	"author": "Aukai Tirrell",
 	"license": "MIT",
 	"bugs": {
@@ -36,6 +43,7 @@
 		"husky": "^0.14.3",
 		"popper.js": "^1.14.4",
 		"prettier": "^1.14.2",
+		"prop-types": "^15.6.2",
 		"react": "^16.5.1",
 		"react-chartjs-2": "^2.7.4",
 		"react-dom": "^16.5.1",
