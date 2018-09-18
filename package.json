@@ -7,6 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "parcel ./src/index.html",
 		"build": "parcel build ./src/index.html",
+		"precommit": "npm run format",
 		"docker-dashboard": "node node_modules/http-server/bin/http-server -p 8000 dist -d",
 		"format": "prettier --config .prettierrc --write \"./src/**/*.js\""
 	},
@@ -14,14 +15,7 @@
 		"type": "git",
 		"url": "git+https://github.com/aukai84/docker-dashboard.git"
 	},
-	"keywords": [
-		"Node",
-		"Docker",
-		"React",
-		"Express",
-		"Material Design Lite",
-		"Material Design"
-	],
+	"keywords": ["Node", "Docker", "React", "Express", "Material Design Lite", "Material Design"],
 	"author": "Aukai Tirrell",
 	"license": "MIT",
 	"bugs": {
@@ -39,6 +33,7 @@
 		"font-awesome": "^4.7.0",
 		"got": "^9.2.2",
 		"http-server": "^0.11.1",
+		"husky": "^0.14.3",
 		"popper.js": "^1.14.4",
 		"prettier": "^1.14.2",
 		"react": "^16.5.1",
