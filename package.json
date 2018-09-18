@@ -1,50 +1,4 @@
 {
-<<<<<<< HEAD
-    "name": "docker-dashboard-app",
-    "version": "1.0.3",
-    "description": "Node package that creates a dashboard UI for your Docker environment",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "node node_modules/.bin/parcel ./src/index.html",
-        "build": "node node_modules/.bin/parcel build ./src/index.html",
-        "postinstall": "npm run build",
-        "docker-dashboard": "node node_modules/http-server/bin/http-server -p 8000 dist -d"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/aukai84/docker-dashboard.git"
-    },
-    "keywords": [
-        "Node",
-        "Docker",
-        "React",
-        "Express",
-        "Bootstrap"
-    ],
-    "author": "Aukai Tirrell",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/aukai84/docker-dashboard/issues"
-    },
-    "homepage": "https://github.com/aukai84/docker-dashboard#readme",
-    "bin": {
-        "say-hello": "./cli.js"
-    },
-    "dependencies": {
-        "axios": "^0.18.0",
-        "got": "^9.2.2",
-        "http-server": "^0.11.1",
-        "react": "^16.5.1",
-        "react-bootstrap": "^0.32.4",
-        "react-dom": "^16.5.1"
-    },
-    "devDependencies": {
-        "babel-preset-env": "^1.7.0",
-        "babel-preset-react": "^6.24.1",
-        "parcel-bundler": "^1.9.7"
-    }
-=======
 	"name": "docker-dashboard-app",
 	"version": "1.0.4",
 	"description": "Node package that creates a dashboard UI for your Docker environment",
@@ -101,5 +55,4 @@
 		"babel-preset-react": "^6.24.1",
 		"parcel-bundler": "^1.9.7"
 	}
->>>>>>> 8b3b9e97bec6f1cb61cac997425283b96b7880ad
 }
