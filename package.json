@@ -30,7 +30,9 @@
 		"docker-dashboard": "run-docker"
 	},
 	"dependencies": {
+		"@material-ui/core": "^3.0.3",
 		"axios": "^0.18.0",
+		"mdbreact": "^4.7.1",
 		"react": "^16.5.1",
 		"react-bootstrap": "^0.32.4",
 		"react-dom": "^16.5.1"
