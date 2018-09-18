@@ -1,11 +1,11 @@
 {
     "name": "docker-dashboard-app",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Node package that creates a dashboard UI for your Docker environment",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "parcel ./src/index.html",
+        "dev": "node node_modules/.bin/parcel ./src/index.html",
         "build": "node node_modules/.bin/parcel build ./src/index.html",
         "install": "npm run build",
         "docker-dashboard": "node node_modules/http-server/bin/http-server -p 8000 dist -d"
