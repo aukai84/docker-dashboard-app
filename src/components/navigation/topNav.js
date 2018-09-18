@@ -14,26 +14,26 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 class TopNav extends Component {
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+    }
 
-	render() {
-		return (
-			<div>
-				<AppBar position="static">
-					<Toolbar>
-						<IconButton color="inherit" aria-label="Open drawer">
-							<MenuIcon />
-						</IconButton>
-						<Typography variant="title" color="inherit" noWrap>
-							Docker-Dashboard
-						</Typography>
-					</Toolbar>
-				</AppBar>
-			</div>
-		);
-	}
+    render() {
+        return (
+            <div>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton color="inherit" aria-label="Open drawer">
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="title" color="inherit" noWrap>
+                            Docker-Dashboard
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
 
 export default TopNav;
