@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import DoughnutChart from '../doughnutChart.js';
+import React, { Component } from 'react'
+import DoughnutChart from '../doughnutChart.js'
 
 class Dashboard extends Component {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		let data = {};
-		return (
-			<div>
-				Dashboard
-				<DoughnutChart />
-			</div>
-		);
-	}
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        let data = {}
+        return (
+            <div>
+                Dashboard
+                <DoughnutChart />
+            </div>
+        )
+    }
 }
 
-export default Dashboard;
+export default Dashboard
