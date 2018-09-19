@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Dashboard from '../components/views/dashboard.js';
 import Containers from '../components/views/containers.js';
 import Images from '../components/views/images.js';
