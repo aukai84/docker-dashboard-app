@@ -11,36 +11,36 @@ import NetworkCell from '@material-ui/icons/NetworkCell';
 import Album from '@material-ui/icons/Album';
 
 export const mailFolderListItems = (
-	<div>
-		<ListItem button>
-			<ListItemIcon>
-				<Dashboard />
-			</ListItemIcon>
-			<ListItemText primary="Dashboard" />
-		</ListItem>
-		<ListItem button>
-			<ListItemIcon>
-				<WebAsset />
-			</ListItemIcon>
-			<ListItemText primary="Containers" />
-		</ListItem>
-		<ListItem button>
-			<ListItemIcon>
-				<Album />
-			</ListItemIcon>
-			<ListItemText primary="Images" />
-		</ListItem>
-		<ListItem button>
-			<ListItemIcon>
-				<DataUsage />
-			</ListItemIcon>
-			<ListItemText primary="Usage" />
-		</ListItem>
-		<ListItem button>
-			<ListItemIcon>
-				<NetworkCell />
-			</ListItemIcon>
-			<ListItemText primary="Networks" />
-		</ListItem>
-	</div>
+    <div>
+        <ListItem button>
+            <ListItemIcon>
+                <Dashboard />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <WebAsset />
+            </ListItemIcon>
+            <ListItemText primary="Containers" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <Album />
+            </ListItemIcon>
+            <ListItemText primary="Images" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <DataUsage />
+            </ListItemIcon>
+            <ListItemText primary="Usage" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <NetworkCell />
+            </ListItemIcon>
+            <ListItemText primary="Networks" />
+        </ListItem>
+    </div>
 );
