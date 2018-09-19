@@ -1,14 +1,14 @@
-import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Dashboard from '@material-ui/icons/Dashboard';
-import DataUsage from '@material-ui/icons/DataUsage';
-import WebAsset from '@material-ui/icons/WebAsset';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
-import NetworkCell from '@material-ui/icons/NetworkCell';
-import Album from '@material-ui/icons/Album';
+import React from 'react'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Dashboard from '@material-ui/icons/Dashboard'
+import DataUsage from '@material-ui/icons/DataUsage'
+import WebAsset from '@material-ui/icons/WebAsset'
+import DeleteIcon from '@material-ui/icons/Delete'
+import ReportIcon from '@material-ui/icons/Report'
+import NetworkCell from '@material-ui/icons/NetworkCell'
+import Album from '@material-ui/icons/Album'
 
 export const mailFolderListItems = (
     <div>
@@ -43,4 +43,4 @@ export const mailFolderListItems = (
             <ListItemText primary="Networks" />
         </ListItem>
     </div>
-);
+)
