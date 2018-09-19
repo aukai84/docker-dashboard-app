@@ -51,6 +51,10 @@
 		"socket.io-client": "^2.1.1"
 	},
 	"devDependencies": {
+		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-react": "^6.24.1",
+		"babel-preset-react-app": "^3.1.2",
 		"parcel-bundler": "^1.9.7"
 	}
 }
