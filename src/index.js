@@ -1,6 +1,11 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './containers/App.js';
 
-import App from './containers/App.js'
-
-render(<App />, document.getElementById('app'))
+render(
+	<Router>
+		<App />
+	</Router>,
+	document.getElementById('app')
+);

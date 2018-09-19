@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class Networks extends Component {
+class Usage extends Component {
 	constructor(props) {
 		super(props);
 	}
 	render() {
-		return <div>Networks</div>;
+		return <div>Usage</div>;
 	}
 }
 
-export default Networks;
+export default Usage;
