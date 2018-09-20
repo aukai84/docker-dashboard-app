@@ -42,6 +42,7 @@
 		"got": "^9.2.2",
 		"http-server": "^0.11.1",
 		"husky": "^0.14.3",
+		"moment": "^2.22.2",
 		"popper.js": "^1.14.4",
 		"prettier": "^1.14.2",
 		"prop-types": "^15.6.2",

@@ -7,5 +7,6 @@
 body {
 	min-height: 100vh;
 	overflow-y: scroll;
+	overflow-x: scroll;
 	letter-spacing: 0.1rem;
 }
