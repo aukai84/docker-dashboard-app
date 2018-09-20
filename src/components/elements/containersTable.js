@@ -75,7 +75,9 @@ class ContainersTable extends Component {
                                     {row.Image}
                                 </TableCell>
                                 <TableCell>
-                                    {row.Ports[0].PrivatePort} -> {row.Ports[0].PublicPort}
+                                    {row.Ports[0] && row.Ports[0].IP ? row.Ports[0].IP : 'No IP'},{' '}
+                                    {row.Ports[0] && row.Ports[0].PrivatePort ? row.Ports[0].PrivatePort : '....'} ->{' '}
+                                    {row.Ports[0] && row.Ports[0].PublicPort ? rows.Ports[0].PublicPort : '....'}
                                 </TableCell>
                                 <TableCell>
                                     <Button variant="contained" color={row.State == 'running' ? 'secondary' : green}>

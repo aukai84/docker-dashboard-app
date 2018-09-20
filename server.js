@@ -21,11 +21,27 @@ io.on('connection', (socket) => {
     socket.on('containers.list', () => {
         refreshContainers()
     })
+    socket.on('images.list', () => {
+        refreshImages()
+    })
+    socket.on('networks.list', () => {
+        refreshNetworks()
+    })
 })
 
 function refreshContainers() {
     docker.listContainers({ all: true }, (err, containers) => {
         console.log('containers', containers)
         io.emit('containers.list', containers)
+    })
+}
+function refreshImages() {
+    docker.listImages({ all: true }, (err, images) => {
+        io.emit('images.list', images)
+    })
+}
+function refreshNetworks() {
+    docker.listNetworks({ all: true }, (err, networks) => {
+        io.emit('networks.list', networks)
     })
 }

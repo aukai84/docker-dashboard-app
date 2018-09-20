@@ -16,12 +16,26 @@ class App extends Component {
             dockerContainers: [],
         }
         socket.on('containers.list', (containers) => {
-            console.log('containers', containers)
+            this.setState({
+                containers,
+            })
+        })
+        socket.on('images.list', (images) => {
+            this.setState({
+                images,
+            })
+        })
+        socket.on('networks.list', (networks) => {
+            this.setState({
+                networks,
+            })
         })
     }
 
     componentDidMount() {
         socket.emit('containers.list')
+        socket.emit('images.list')
+        socket.emit('networks.list')
         axios.get('http://localhost:8000/images/json').then((res) => {
             this.setState({
                 images: res.data,
