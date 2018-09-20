@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import DoughnutChart from '../elements/doughnutChart.js';
+import DashboardLineChart from '../elements/lineChart.js';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core';
 
 const styles = theme => ({
 	root: {
-		flexGrow: 1
+		flexGrow: 1,
+		padding: 32
+	},
+	usage: {
+		margin: 16
 	},
 	paper: {
 		height: 140,
@@ -58,6 +63,12 @@ class Dashboard extends Component {
 					</Grid>
 					<Grid item>
 						<DoughnutChart chartData={data} name="Networks" />
+					</Grid>
+					<Grid container direction={direction}>
+						<Typography variant="headline" className={classes.usage} component="h1">
+							Usage
+						</Typography>
+						<DashboardLineChart />
 					</Grid>
 				</Grid>
 			</div>
