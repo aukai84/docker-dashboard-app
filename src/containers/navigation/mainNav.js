@@ -19,7 +19,7 @@ const styles = (theme) => ({
         flexGrow: 1,
     },
     appFrame: {
-        height: 440,
+        height: '100%',
         zIndex: 1,
         overflow: 'hidden',
         position: 'relative',
