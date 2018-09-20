@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import MainNav from './navigation/mainNav.js'
 import axios from 'axios'
-import io from 'socket.io-client'
+import * as io from 'socket.io-client'
 import MainView from './mainView.js'
+const API_URL = 'http://localhost:8000'
+let socket = io.connect(API_URL)
 
 class App extends Component {
     constructor(props) {
@@ -13,19 +15,24 @@ class App extends Component {
             networks: [],
             dockerContainers: [],
         }
+        socket.on('containers.list', (containers) => {
+            console.log('containers', containers)
+        })
     }
+
     componentDidMount() {
-        axios.get('http://localhost:2375/images/json').then((res) => {
+        socket.emit('containers.list')
+        axios.get('http://localhost:8000/images/json').then((res) => {
             this.setState({
                 images: res.data,
             })
         })
-        axios.get('http://localhost:2375/containers/json').then((res) => {
+        axios.get('http://localhost:8000/containers/').then((res) => {
             this.setState({
                 containers: res.data,
             })
         })
-        axios.get('http://localhost:2375/networks').then((res) => {
+        axios.get('http://localhost:8000/networks').then((res) => {
             this.setState({
                 networks: res.data,
             })
