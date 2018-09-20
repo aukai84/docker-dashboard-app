@@ -39,6 +39,8 @@
 		"chart.js": "^2.7.2",
 		"classes": "^0.3.0",
 		"classnames": "^2.2.6",
+		"dockerode": "^2.5.7",
+		"dotenv": "^6.0.0",
 		"font-awesome": "^4.7.0",
 		"got": "^9.2.2",
 		"http-server": "^0.11.1",
