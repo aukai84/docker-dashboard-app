@@ -13,11 +13,11 @@ class MainView extends Component {
     render() {
         return (
             <Switch>
-                <Route path="/" exact component={Dashboard} />
-                <Route path="/containers" component={Containers} />
-                <Route path="/images" exact component={Images} />
-                <Route path="/usage" exact component={Usage} />
-                <Route path="/networks" exact component={Networks} />
+                <Route path="/" exact render={() => <Dashboard {...this.props} />} />
+                <Route path="/containers" render={() => <Containers containers={this.props.containers} />} />
+                <Route path="/images" render={() => <Images images={this.props.images} />} />
+                <Route path="/usage" component={Usage} />
+                <Route path="/networks" render={() => <Networks networks={this.props.networks} />} />
             </Switch>
         )
     }

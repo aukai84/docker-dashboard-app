@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
+import DockerIcon from '../../assets/docker-icon-white-filled.png'
 import { mailFolderListItems, otherMailFolderListItems } from './tileData'
 
 const drawerWidth = 240
@@ -19,7 +20,7 @@ const styles = (theme) => ({
         flexGrow: 1,
     },
     appFrame: {
-        height: 440,
+        minHeight: '100vh',
         zIndex: 1,
         overflow: 'hidden',
         position: 'relative',
@@ -28,6 +29,7 @@ const styles = (theme) => ({
     },
     appBar: {
         width: `calc(100% - ${drawerWidth}px)`,
+        backgroundColor: '#2196f3',
     },
     'appBar-left': {
         marginLeft: drawerWidth,
@@ -44,6 +46,12 @@ const styles = (theme) => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing.unit * 3,
+    },
+    icon: {
+        height: 50,
+        width: 50,
+        bottom: 0,
+        marginLeft: 15,
     },
 })
 
@@ -93,6 +101,7 @@ class MainNav extends Component {
                             <Typography variant="title" color="inherit" noWrap>
                                 Docker Dashboard
                             </Typography>
+                            <img src={DockerIcon} className={classes.icon} />
                         </Toolbar>
                     </AppBar>
                     {before}
