@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import express, { static } from 'express'
 import { join } from 'path'
 let app = express()
