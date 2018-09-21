@@ -31,13 +31,13 @@ io.on('connection', (socket) => {
         refreshCpuUsage()
     })
     socket.on('container.start', (args) => {
-        const container = getContainer(args.id)
+        const container = docker.getContainer(args.id)
         if (container) {
             container.start((err, data) => refreshContainers())
         }
     })
     socket.on('container.stop', (args) => {
-        const container = getContainer(args.id)
+        const container = docker.getContainer(args.id)
         if (container) {
             container.stop((err, data) => refreshContainers())
         }
