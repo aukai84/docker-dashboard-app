@@ -27,9 +27,9 @@ io.on('connection', (socket) => {
     socket.on('networks.list', () => {
         refreshNetworks()
     })
-    socket.on('cpu.usage', () => {
+    /*socket.on('cpu.usage', () => {
         refreshCpuUsage()
-    })
+    })*/
     socket.on('container.start', (args) => {
         const container = docker.getContainer(args.id)
         if (container) {
@@ -85,7 +85,7 @@ function refreshCpuUsage() {
     io.emit('cpu.usage', Math.random() * 100)
 }
 
-setInterval(refreshCpuUsage, 2000)
+//setInterval(refreshCpuUsage, 2000)
 setInterval(refreshContainers, 2000)
 setInterval(refreshImages, 2000)
 setInterval(refreshNetworks, 2000)
