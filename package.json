@@ -1,6 +1,6 @@
 {
 	"name": "docker-dashboard-app",
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"description": "Node package that creates a dashboard UI for your Docker environment",
 	"main": "index.js",
 	"scripts": {
@@ -9,7 +9,7 @@
 		"build": "parcel build ./src/index.html",
 		"precommit": "npm run format",
 		"format": "prettier --config .prettierrc --write \"./src/**/*.js\"",
-		"prepublish": "npm run build"
+		"postinstall": "npm run build"
 	},
 	"bin": {
 		"docker-dashboard": "./server.js"
