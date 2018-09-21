@@ -10,6 +10,8 @@ import Tooltip from 'recharts/lib/component/Tooltip'
 import Legend from 'recharts/lib/component/Legend'
 import Typography from '@material-ui/core/Typography'
 import * as io from 'socket.io-client'
+import moment from 'moment'
+import { isMoment } from 'moment'
 const API_URL = 'http://localhost:8000'
 const socket = io.connect(API_URL)
 
@@ -26,8 +28,14 @@ const data = [
 class DashboardLineChart extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            data: [],
+        }
         socket.on('cpu.usage', (usage) => {
-            console.log('usage', usage)
+            console.log('moment', moment().format('mm:ss'))
+            this.setState({
+                data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
+            })
         })
     }
 
@@ -38,14 +46,13 @@ class DashboardLineChart extends Component {
     render() {
         return (
             <ResponsiveContainer width="99%" height={320}>
-                <LineChart data={data}>
-                    <XAxis dataKey="name" />
+                <LineChart data={this.state.data}>
+                    <XAxis dataKey="time" />
                     <YAxis />
                     <CartesianGrid vertical={false} strokeDasharray=" 3 3" />
                     <Tooltip />
                     <Legend />
                     <Line type="monotone" dataKey="cpu" stroke="#82ca9d" />
-                    <Line type="monotone" dataKey="memory" stroke="#8884d8" activeDot={{ r: 8 }} />
                 </LineChart>
             </ResponsiveContainer>
         )
