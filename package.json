@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "parcel ./src/index.html",
 		"build": "parcel build ./src/index.html",
-		"precommit": "npm run format --no-verify",
+		"precommit": "npm run format",
 		"format": "prettier --config .prettierrc --write \"./src/**/*.js\"",
 		"prepublish": "npm run build"
 	},
