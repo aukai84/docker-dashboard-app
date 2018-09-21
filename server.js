@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import express, { static } from 'express'
 import { join } from 'path'
 let app = express()
@@ -68,7 +70,7 @@ function refreshCpuUsage() {
 		return usage
 	}
 	listContainers({ all: true }, (err, containers) => {
-		if (containers) {
+		if (containers && containers[0]) {
 			let dockerContainer = getContainer(containers[0].Id)
 			dockerContainer.stats({ stream: false }, (err, res) => {
 				let cpuStats = res.cpu_stats.cpu_usage.total_usage
@@ -77,6 +79,8 @@ function refreshCpuUsage() {
 				let systemPreCpuStats = res.precpu_stats.system_cpu_usage
 				io.emit('cpu.usage', calculatePercentage(cpuStats, preCpuStats, systemCpuStats, systemPreCpuStats))
 			})
+		} else {
+			io.emit('cpu.usage', 0)
 		}
 		/*containers.forEach((container) => {
             let dockerContainer = docker.getContainer(container.Id)
