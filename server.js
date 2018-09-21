@@ -45,3 +45,7 @@ function refreshNetworks() {
         io.emit('networks.list', networks)
     })
 }
+
+setInterval(refreshContainers, 2000)
+setInterval(refreshImages, 2000)
+setInterval(refreshNetworks, 2000)
