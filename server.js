@@ -27,9 +27,9 @@ io.on('connection', (socket) => {
     socket.on('networks.list', () => {
         refreshNetworks()
     })
-    /*socket.on('cpu.usage', () => {
+    socket.on('cpu.usage', () => {
         refreshCpuUsage()
-    })*/
+    })
     socket.on('container.start', (args) => {
         const container = docker.getContainer(args.id)
         if (container) {
@@ -61,18 +61,24 @@ function refreshNetworks() {
 }
 
 function refreshCpuUsage() {
-    let cpuStats = 0
-    let preCpuStats = 0
-    let systemCpuStats = 0
-    let systemPreCpuStats = 0
     function calculatePercentage(cpu, preCpu, system, preSystem) {
         let cpuDelta = cpu - preCpu
         let systemDelta = system - preSystem
-        let usage = cpuDelta / systemDelta
+        let usage = (cpuDelta / systemDelta) * 100
         return usage
     }
     docker.listContainers({ all: true }, (err, containers) => {
-        containers.forEach((container) => {
+        if (containers) {
+            let dockerContainer = docker.getContainer(containers[0].Id)
+            dockerContainer.stats({ stream: false }, (err, res) => {
+                let cpuStats = res.cpu_stats.cpu_usage.total_usage
+                let preCpuStats = res.precpu_stats.cpu_usage.total_usage
+                let systemCpuStats = res.cpu_stats.system_cpu_usage
+                let systemPreCpuStats = res.precpu_stats.system_cpu_usage
+                io.emit('cpu.usage', calculatePercentage(cpuStats, preCpuStats, systemCpuStats, systemPreCpuStats))
+            })
+        }
+        /*containers.forEach((container) => {
             let dockerContainer = docker.getContainer(container.Id)
             dockerContainer.stats({ stream: false }, (err, res) => {
                 cpuStats += res.cpu_stats.cpu_usage.total_usage
@@ -80,12 +86,11 @@ function refreshCpuUsage() {
                 systemCpuStats += res.cpu_stats.system_cpu_usage
                 systemPreCpuStats += res.precpu_stats.system_cpu_usage
             })
-        })
+        })*/
     })
-    io.emit('cpu.usage', Math.random() * 100)
 }
 
-//setInterval(refreshCpuUsage, 2000)
+setInterval(refreshCpuUsage, 2000)
 setInterval(refreshContainers, 2000)
 setInterval(refreshImages, 2000)
 setInterval(refreshNetworks, 2000)

@@ -42,7 +42,6 @@ class Dashboard extends Component {
         ]
         const { classes } = this.props
         const { justify, direction, alignItems } = this.state
-        console.log('dashboard props', this.props)
         return (
             <div>
                 <Typography variant="headline" component="h1">
@@ -67,7 +66,7 @@ class Dashboard extends Component {
                     </Grid>
                     <Grid container direction={direction}>
                         <Typography variant="headline" className={classes.usage} component="h1">
-                            Usage
+                            CPU Usage
                         </Typography>
                         <DashboardLineChart chartDat={this.props} />
                     </Grid>

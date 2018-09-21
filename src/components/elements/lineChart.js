@@ -22,12 +22,6 @@ class DashboardLineChart extends Component {
             data: [],
         }
         socket.on('cpu.usage', (usage) => {
-            let newArray = [...this.state.data]
-            if (newArray.length > 10) {
-                this.setState({
-                    data: newArray.shift(),
-                })
-            }
             this.setState({
                 data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
             })
@@ -39,20 +33,15 @@ class DashboardLineChart extends Component {
     }
 
     render() {
-        if (this.state.data.length > 10) {
-            this.setState({
-                data: this.state.data.slice(0, 1),
-            })
-        }
         return (
             <ResponsiveContainer width="99%" height={320}>
                 <LineChart data={this.state.data}>
                     <XAxis dataKey="time" />
-                    <YAxis />
-                    <CartesianGrid vertical={false} strokeDasharray=" 3 3" />
+                    <YAxis label={{ value: 'percentage', angle: -90, position: 'insideLeft' }} />
+                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="cpu" stroke="#82ca9d" />
+                    <Line dot={false} type="monotone" dataKey="cpu" stroke="#00caca" />
                 </LineChart>
             </ResponsiveContainer>
         )
