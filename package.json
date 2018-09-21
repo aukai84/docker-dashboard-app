@@ -1,16 +1,16 @@
 {
     "name": "docker-dashboard-app",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "description": "Node package that creates a dashboard UI for your Docker environment",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "parcel ./src/index.html",
-        "start": "nodemon server.js",
+        "docker-dashboard": "nodemon server.js",
         "build": "parcel build ./src/index.html",
         "precommit": "npm run format",
-        "docker-dashboard": "node node_modules/http-server/bin/http-server -p 8000 dist -d",
-        "format": "prettier --config .prettierrc --write \"./src/**/*.js\""
+        "format": "prettier --config .prettierrc --write \"./src/**/*.js\"",
+        "prepublish": "npm run build"
     },
     "repository": {
         "type": "git",
