@@ -74,6 +74,6 @@ function refreshCpuUsage() {
 }
 
 setInterval(refreshCpuUsage, 2000)
-/*setInterval(refreshContainers, 2000)
+setInterval(refreshContainers, 2000)
 setInterval(refreshImages, 2000)
-setInterval(refreshNetworks, 2000)*/
+setInterval(refreshNetworks, 2000)

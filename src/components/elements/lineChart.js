@@ -15,48 +15,48 @@ import { isMoment } from 'moment'
 const API_URL = 'http://localhost:8000'
 const socket = io.connect(API_URL)
 
-const data = [
-    { name: 'Mon', cpu: 2200, memory: 3400 },
-    { name: 'Tue', cpu: 1280, memory: 2398 },
-    { name: 'Wed', cpu: 5000, memory: 4300 },
-    { name: 'Thu', cpu: 4780, memory: 2908 },
-    { name: 'Fri', cpu: 5890, memory: 4800 },
-    { name: 'Sat', cpu: 4390, memory: 3800 },
-    { name: 'Sun', cpu: 4490, memory: 4300 },
-]
-
 class DashboardLineChart extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            data: [],
-        }
-        socket.on('cpu.usage', (usage) => {
-            console.log('moment', moment().format('mm:ss'))
-            this.setState({
-                data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
-            })
-        })
-    }
+	constructor(props) {
+		super(props)
+		this.state = {
+			data: [],
+		}
+		socket.on('cpu.usage', usage => {
+			let newArray = [...this.state.data]
+			if (newArray.length > 10) {
+				this.setState({
+					data: newArray.shift(),
+				})
+			}
+			this.setState({
+				data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
+			})
+		})
+	}
 
-    componentDidMount() {
-        socket.emit('cpu.usage')
-    }
+	componentDidMount() {
+		socket.emit('cpu.usage')
+	}
 
-    render() {
-        return (
-            <ResponsiveContainer width="99%" height={320}>
-                <LineChart data={this.state.data}>
-                    <XAxis dataKey="time" />
-                    <YAxis />
-                    <CartesianGrid vertical={false} strokeDasharray=" 3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="cpu" stroke="#82ca9d" />
-                </LineChart>
-            </ResponsiveContainer>
-        )
-    }
+	render() {
+		if (this.state.data.length > 10) {
+			this.setState({
+				data: this.state.data.slice(0, 1),
+			})
+		}
+		return (
+			<ResponsiveContainer width="99%" height={320}>
+				<LineChart data={this.state.data}>
+					<XAxis dataKey="time" />
+					<YAxis />
+					<CartesianGrid vertical={false} strokeDasharray=" 3 3" />
+					<Tooltip />
+					<Legend />
+					<Line type="monotone" dataKey="cpu" stroke="#82ca9d" />
+				</LineChart>
+			</ResponsiveContainer>
+		)
+	}
 }
 
 export default DashboardLineChart

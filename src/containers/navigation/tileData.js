@@ -13,46 +13,42 @@ import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom'
 const removeUnderline = { textDecoration: 'none' }
 
 export const mailFolderListItems = (
-    <div>
-        <Link to="/" style={removeUnderline}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Dashboard />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-            </ListItem>
-        </Link>
-        <Link to="/containers" style={removeUnderline}>
-            <ListItem button>
-                <ListItemIcon>
-                    <WebAsset />
-                </ListItemIcon>
-                <ListItemText primary="Containers" />
-            </ListItem>
-        </Link>
-        <Link to="/images" style={removeUnderline}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Album />
-                </ListItemIcon>
-                <ListItemText primary="Images" />
-            </ListItem>
-        </Link>
-        <Link to="/usage" style={removeUnderline}>
-            <ListItem button>
-                <ListItemIcon>
-                    <DataUsage />
-                </ListItemIcon>
-                <ListItemText primary="Usage" />
-            </ListItem>
-        </Link>
-        <Link to="/networks" style={removeUnderline}>
-            <ListItem button>
-                <ListItemIcon>
-                    <NetworkCell />
-                </ListItemIcon>
-                <ListItemText primary="Networks" />
-            </ListItem>
-        </Link>
-    </div>
+	<div>
+		<Link to="/" style={removeUnderline}>
+			<ListItem button>
+				<ListItemIcon>
+					<Dashboard />
+				</ListItemIcon>
+				<ListItemText primary="Dashboard" />
+			</ListItem>
+		</Link>
+		<Link to="/containers" style={removeUnderline}>
+			<ListItem button>
+				<ListItemIcon>
+					<WebAsset />
+				</ListItemIcon>
+				<ListItemText primary="Containers" />
+			</ListItem>
+		</Link>
+		<Link to="/images" style={removeUnderline}>
+			<ListItem button>
+				<ListItemIcon>
+					<Album />
+				</ListItemIcon>
+				<ListItemText primary="Images" />
+			</ListItem>
+		</Link>
+		<ListItem disabled>
+			<ListItemIcon>
+				<DataUsage />
+			</ListItemIcon>
+			<ListItemText primary="Usage" />
+		</ListItem>
+		<ListItem disabled>
+			<ListItemIcon>
+				<NetworkCell />
+			</ListItemIcon>
+			<ListItemText primary="Networks" />
+		</ListItem>
+	</div>
 )
