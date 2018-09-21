@@ -16,6 +16,9 @@ import AutoRenew from '@material-ui/icons/AutoRenew'
 import green from '@material-ui/core/colors/green'
 import classnames from 'classnames'
 import DockerIcon from '../../assets/icons8-docker-48.png'
+import * as io from 'socket.io-client'
+const API_URL = 'http://localhost:8000'
+const socket = io.connect(API_URL)
 
 const styles = (theme) => ({
     root: {
@@ -50,6 +53,16 @@ const styles = (theme) => ({
 class ContainersTable extends Component {
     constructor(props) {
         super(props)
+        this.startContainer = this.startContainer.bind(this)
+        this.stopContainer = this.stopContainer.bind(this)
+    }
+
+    startContainer(id) {
+        socket.emit('container.start', { id })
+    }
+
+    stopContainer(id) {
+        socket.emit('container.stop', { id })
     }
 
     render() {
@@ -85,11 +98,20 @@ class ContainersTable extends Component {
                                 </TableCell>
                                 <TableCell>
                                     {row.State === 'running' ? (
-                                        <Button className={classes.button} variant="contained" color="secondary">
+                                        <Button
+                                            onClick={() => this.stopContainer(row.Id)}
+                                            className={classes.button}
+                                            variant="contained"
+                                            color="secondary"
+                                        >
                                             <Stop />
                                         </Button>
                                     ) : (
-                                        <Button variant="contained" color={'green'}>
+                                        <Button
+                                            onClick={() => this.startContainer(row.Id)}
+                                            variant="contained"
+                                            color={'green'}
+                                        >
                                             <PlayArrow />
                                         </Button>
                                     )}
