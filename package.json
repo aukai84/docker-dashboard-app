@@ -1,6 +1,6 @@
 {
     "name": "docker-dashboard-app",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "Node package that creates a dashboard UI for your Docker environment",
     "main": "index.js",
     "scripts": {
