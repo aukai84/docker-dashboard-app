@@ -89,7 +89,7 @@ class ContainersTable extends Component {
                                             <Stop />
                                         </Button>
                                     ) : (
-                                        <Button variant="contained" color="#8bc34a">
+                                        <Button variant="contained" color={'green'}>
                                             <PlayArrow />
                                         </Button>
                                     )}

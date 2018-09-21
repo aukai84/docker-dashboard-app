@@ -1,12 +1,16 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    zoom: 0.85;
 }
 
 body {
-	min-height: 100vh;
-	overflow-y: scroll;
-	overflow-x: scroll;
-	letter-spacing: 0.1rem;
+    min-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    letter-spacing: 0.1rem;
 }
