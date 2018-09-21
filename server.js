@@ -71,11 +71,17 @@ function refreshCpuUsage() {
         if (containers && containers[0]) {
             let dockerContainer = docker.getContainer(containers[0].Id)
             dockerContainer.stats({ stream: false }, (err, res) => {
-                let cpuStats = res.cpu_stats.cpu_usage.total_usage
-                let preCpuStats = res.precpu_stats.cpu_usage.total_usage
-                let systemCpuStats = res.cpu_stats.system_cpu_usage
-                let systemPreCpuStats = res.precpu_stats.system_cpu_usage
-                io.emit('cpu.usage', calculatePercentage(cpuStats, preCpuStats, systemCpuStats, systemPreCpuStats))
+                if (err) {
+                    console.log('error', err)
+                } else if (res) {
+                    let cpuStats = res.cpu_stats.cpu_usage.total_usage
+                    let preCpuStats = res.precpu_stats.cpu_usage.total_usage
+                    let systemCpuStats = res.cpu_stats.system_cpu_usage
+                    let systemPreCpuStats = res.precpu_stats.system_cpu_usage
+                    io.emit('cpu.usage', calculatePercentage(cpuStats, preCpuStats, systemCpuStats, systemPreCpuStats))
+                } else {
+                    io.emit('cpu.usage', 0)
+                }
             })
         } else {
             io.emit('cpu.usage', 0)
