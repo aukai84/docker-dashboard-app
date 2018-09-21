@@ -9,7 +9,9 @@ import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid'
 import Tooltip from 'recharts/lib/component/Tooltip'
 import Legend from 'recharts/lib/component/Legend'
 import Typography from '@material-ui/core/Typography'
-import io from 'socket.io-client'
+import * as io from 'socket.io-client'
+const API_URL = 'http://localhost:8000'
+const socket = io.connect(API_URL)
 
 const data = [
     { name: 'Mon', cpu: 2200, memory: 3400 },
@@ -24,13 +26,13 @@ const data = [
 class DashboardLineChart extends Component {
     constructor(props) {
         super(props)
-        this.renderUsage = this.renderUsage.bind(this)
+        socket.on('cpu.usage', (usage) => {
+            console.log('usage', usage)
+        })
     }
 
-    renderUsage() {
-        socket.on('event', (data) => {
-            console.log('socketdata', data)
-        })
+    componentDidMount() {
+        socket.emit('cpu.usage')
     }
 
     render() {

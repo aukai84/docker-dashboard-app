@@ -27,11 +27,13 @@ io.on('connection', (socket) => {
     socket.on('networks.list', () => {
         refreshNetworks()
     })
+    socket.on('cpu.usage', () => {
+        refreshCpuUsage()
+    })
 })
 
 function refreshContainers() {
     docker.listContainers({ all: true }, (err, containers) => {
-        console.log('containers', containers)
         io.emit('containers.list', containers)
     })
 }
@@ -46,6 +48,33 @@ function refreshNetworks() {
     })
 }
 
-setInterval(refreshContainers, 2000)
+function refreshCpuUsage() {
+    docker.listContainers({ all: true }, (err, containers) => {
+        let cpuStats = 0
+        let preCpuStats = 0
+        let systemCpuStats = 0
+        let systemPreCpuStats = 0
+        let dockerContainer = docker.getContainer(containers[0].Id)
+        dockerContainer.stats((err, stream) => {
+            stream.on('data', (data) => {
+                console.log('data', data)
+            })
+            stream.on('end', () => {
+                console.log('end stream')
+            })
+        })
+        /*containers.forEach((container) => {
+            let dockerContainer = docker.getContainer(container.Id)
+            dockerContainer.stats((err, res) => {
+                cpuStats += res.cpu_stats.cpu_usage.total_usage
+                preCpuStats += res.precpu_stats.cpu_usage.total_usage
+                systemCpuStats += res.cpu_stats.system_cpu_usage
+                systemPreCpuStats += res.precpu_stats.system_cpu_usage
+            })
+        })*/
+    })
+}
+
+/*setInterval(refreshContainers, 2000)
 setInterval(refreshImages, 2000)
-setInterval(refreshNetworks, 2000)
+setInterval(refreshNetworks, 2000)*/
