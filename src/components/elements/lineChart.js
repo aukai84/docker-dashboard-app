@@ -16,47 +16,47 @@ const API_URL = 'http://localhost:8000'
 const socket = io.connect(API_URL)
 
 class DashboardLineChart extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			data: [],
-		}
-		socket.on('cpu.usage', usage => {
-			let newArray = [...this.state.data]
-			if (newArray.length > 10) {
-				this.setState({
-					data: newArray.shift(),
-				})
-			}
-			this.setState({
-				data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
-			})
-		})
-	}
+    constructor(props) {
+        super(props)
+        this.state = {
+            data: [],
+        }
+        socket.on('cpu.usage', (usage) => {
+            let newArray = [...this.state.data]
+            if (newArray.length > 10) {
+                this.setState({
+                    data: newArray.shift(),
+                })
+            }
+            this.setState({
+                data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
+            })
+        })
+    }
 
-	componentDidMount() {
-		socket.emit('cpu.usage')
-	}
+    componentDidMount() {
+        socket.emit('cpu.usage')
+    }
 
-	render() {
-		if (this.state.data.length > 10) {
-			this.setState({
-				data: this.state.data.slice(0, 1),
-			})
-		}
-		return (
-			<ResponsiveContainer width="99%" height={320}>
-				<LineChart data={this.state.data}>
-					<XAxis dataKey="time" />
-					<YAxis />
-					<CartesianGrid vertical={false} strokeDasharray=" 3 3" />
-					<Tooltip />
-					<Legend />
-					<Line type="monotone" dataKey="cpu" stroke="#82ca9d" />
-				</LineChart>
-			</ResponsiveContainer>
-		)
-	}
+    render() {
+        if (this.state.data.length > 10) {
+            this.setState({
+                data: this.state.data.slice(0, 1),
+            })
+        }
+        return (
+            <ResponsiveContainer width="99%" height={320}>
+                <LineChart data={this.state.data}>
+                    <XAxis dataKey="time" />
+                    <YAxis />
+                    <CartesianGrid vertical={false} strokeDasharray=" 3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="cpu" stroke="#82ca9d" />
+                </LineChart>
+            </ResponsiveContainer>
+        )
+    }
 }
 
 export default DashboardLineChart
