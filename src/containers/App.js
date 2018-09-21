@@ -53,7 +53,6 @@ class App extends Component {
         })
     }
     render() {
-        console.log('docker', this.state)
         return (
             <MainNav>
                 <MainView

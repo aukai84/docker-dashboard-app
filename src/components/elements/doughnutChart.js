@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { PieChart, Pie, Legend, Tooltip } from 'Recharts'
+import { PieChart, Pie, Legend, Tooltip, Cell } from 'Recharts'
 import Grid from '@material-ui/core/Grid'
 
 const styles = {
@@ -43,7 +43,6 @@ class DoughnutChart extends Component {
     }
     render() {
         const { classes } = this.props
-        console.log(this.props, 'chart props')
         return (
             <Card className={classes.card}>
                 <Grid container alignItems="center" justify="center">

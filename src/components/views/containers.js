@@ -9,7 +9,6 @@ class Containers extends Component {
         super(props)
     }
     render() {
-        console.log('container props', this.props)
         const headers = [
             { name: 'Name', value: 'Names[0]' },
             { name: 'State', value: 'State' },

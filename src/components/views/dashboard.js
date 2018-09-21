@@ -29,17 +29,21 @@ class Dashboard extends Component {
             direction: 'row',
             justify: 'center',
             alignItems: 'center',
+            containers: [],
         }
     }
+    componentDidMount() {
+        this.setState({
+            containers: this.props.containers.map((container) => {
+                return {
+                    name: container.Names[0].substr(1),
+                    value: 1,
+                }
+            }),
+        })
+    }
     render() {
-        let data = [
-            { name: 'Group A', value: 2400 },
-            { name: 'Group B', value: 4567 },
-            { name: 'Group C', value: 1398 },
-            { name: 'Group D', value: 9800 },
-            { name: 'Group E', value: 3908 },
-            { name: 'Group F', value: 4800 },
-        ]
+        let data = [{ name: 'Docker Data', value: 100 }]
         const { classes } = this.props
         const { justify, direction, alignItems } = this.state
         return (
