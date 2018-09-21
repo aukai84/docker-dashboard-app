@@ -37,7 +37,7 @@ class DashboardLineChart extends Component {
             <ResponsiveContainer width="99%" height={320}>
                 <LineChart data={this.state.data}>
                     <XAxis dataKey="time" />
-                    <YAxis label={{ value: 'percentage', angle: -90, position: 'insideLeft' }} />
+                    <YAxis />
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
