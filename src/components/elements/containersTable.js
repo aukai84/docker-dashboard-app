@@ -110,7 +110,7 @@ class ContainersTable extends Component {
                                         <Button
                                             onClick={() => this.startContainer(row.Id)}
                                             variant="contained"
-                                            color={'green'}
+                                            color="primary"
                                         >
                                             <PlayArrow />
                                         </Button>
