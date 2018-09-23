@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { PieChart, Pie, Legend, Tooltip, Cell } from 'Recharts'
 import Grid from '@material-ui/core/Grid'
 
-const styles = {
+const styles = (theme) => ({
     card: {
         width: 275,
         maxWidth: 450,
@@ -32,10 +32,13 @@ const styles = {
         marginTop: 16,
         justify: 'center',
     },
+    usageChart: {
+        textTransform: 'capitalize',
+    },
     pos: {
         marginBottom: 12,
     },
-}
+})
 
 class DoughnutChart extends Component {
     constructor(props) {
@@ -49,8 +52,12 @@ class DoughnutChart extends Component {
                     <CardContent>
                         <Typography className={classes.title}>{this.props.name}</Typography>
                         <Grid container alignItems="center" justify="center">
-                            <Typography className={classes.count} variant="headline" component="h1">
-                                {this.props.length}
+                            <Typography
+                                className={classes[this.props.classPick]}
+                                variant="headline"
+                                component={this.props.component}
+                            >
+                                {this.props.header}
                             </Typography>
                         </Grid>
                         <PieChart width={275} height={200}>
