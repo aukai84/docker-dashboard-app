@@ -55,6 +55,8 @@ class ContainersTable extends Component {
         super(props)
         this.startContainer = this.startContainer.bind(this)
         this.stopContainer = this.stopContainer.bind(this)
+        this.restartContainer = this.restartContainer.bind(this)
+        this.removeContainer = this.removeContainer.bind(this)
     }
 
     startContainer(id) {
@@ -67,6 +69,10 @@ class ContainersTable extends Component {
 
     restartContainer(id) {
         socket.emit('container.restart', { id })
+    }
+
+    removeContainer(id) {
+        socket.emit('container.remove', { id })
     }
 
     render() {
@@ -119,12 +125,11 @@ class ContainersTable extends Component {
                                             <PlayArrow />
                                         </Button>
                                     )}
-                                    <Button
-                                        onClick={() => this.restartContainer(row.ID)}
-                                        variant="contained"
-                                        color="green"
-                                    >
+                                    <Button onClick={() => this.restartContainer(row.Id)} variant="contained">
                                         <AutoRenew />
+                                    </Button>
+                                    <Button onClick={() => this.removeContainer(row.Id)} variant="contained">
+                                        <Delete />
                                     </Button>
                                 </TableCell>
                             </TableRow>

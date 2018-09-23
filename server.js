@@ -42,9 +42,20 @@ io.on('connection', (socket) => {
             container.stop((err, data) => refreshContainers())
         }
     })
-    socket.on('conatiner.restart', (args) => {
+    socket.on('container.restart', (args) => {
         const container = docker.getContainer(args.id)
-        if (container) container.restart((err, data) => refreshContainers())
+        if (container) {
+            container.restart((err, data) => refreshContainers())
+        }
+    })
+    socket.on('container.remove', (args) => {
+        const container = docker.getContainer(args.id)
+        if (container) {
+            container.stop((err, data) => {
+                refreshContainers()
+                container.remove((err, data) => refreshContainers())
+            })
+        }
     })
 })
 
