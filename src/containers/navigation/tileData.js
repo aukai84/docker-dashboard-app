@@ -38,12 +38,14 @@ export const mailFolderListItems = (
                 <ListItemText primary="Images" />
             </ListItem>
         </Link>
-        <ListItem disabled>
-            <ListItemIcon>
-                <DataUsage />
-            </ListItemIcon>
-            <ListItemText primary="Usage" />
-        </ListItem>
+        <Link to="/usage" style={removeUnderline}>
+            <ListItem button>
+                <ListItemIcon>
+                    <DataUsage />
+                </ListItemIcon>
+                <ListItemText primary="Usage" />
+            </ListItem>
+        </Link>
         <ListItem disabled>
             <ListItemIcon>
                 <NetworkCell />
