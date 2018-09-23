@@ -65,6 +65,10 @@ class ContainersTable extends Component {
         socket.emit('container.stop', { id })
     }
 
+    restartContainer(id) {
+        socket.emit('container.restart', { id })
+    }
+
     render() {
         const { classes } = this.props
         return (
@@ -115,6 +119,13 @@ class ContainersTable extends Component {
                                             <PlayArrow />
                                         </Button>
                                     )}
+                                    <Button
+                                        onClick={() => this.restartContainer(row.ID)}
+                                        variant="contained"
+                                        color="green"
+                                    >
+                                        <AutoRenew />
+                                    </Button>
                                 </TableCell>
                             </TableRow>
                         ))}
