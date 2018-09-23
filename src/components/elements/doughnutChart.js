@@ -38,6 +38,9 @@ const styles = (theme) => ({
     pos: {
         marginBottom: 12,
     },
+    rotateChart: {
+        transform: 'rotate(-360deg)',
+    },
 })
 
 class DoughnutChart extends Component {
@@ -62,8 +65,10 @@ class DoughnutChart extends Component {
                         </Grid>
                         <PieChart width={275} height={200}>
                             <Pie
+                                className={classes.rotateChart}
                                 data={this.props.chartData}
                                 dataKey="value"
+                                startAngle={-180}
                                 cx={'50%'}
                                 cy={'50%'}
                                 innerRadius={55}
