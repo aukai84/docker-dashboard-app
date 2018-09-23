@@ -52,7 +52,6 @@ io.on('connection', (socket) => {
         const container = docker.getContainer(args.id)
         if (container) {
             container.stop((err, data) => {
-                refreshContainers()
                 container.remove((err, data) => refreshContainers())
             })
         }
