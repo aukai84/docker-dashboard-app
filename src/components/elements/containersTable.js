@@ -37,8 +37,8 @@ const styles = (theme) => ({
         marginRight: 5,
         color: 'rgba(0, 0, 0, 0.87)',
     },
-    button: {
-        padding: 8,
+    buttonCell: {
+        padding: 4,
     },
     green: {
         color: '#8bc34a',
@@ -47,6 +47,14 @@ const styles = (theme) => ({
     red: {
         color: 'red',
         fontWeight: 'bold',
+    },
+    lightBlue: {
+        backgroundColor: '#81D4FA',
+        color: 'white',
+    },
+    greenButton: {
+        backgroundColor: '#8bc34a',
+        color: 'white',
     },
 })
 
@@ -106,11 +114,11 @@ class ContainersTable extends Component {
                                     {row.Ports[0] && row.Ports[0].PrivatePort ? row.Ports[0].PrivatePort : '....'} ->{' '}
                                     {row.Ports[0] && row.Ports[0].PublicPort ? row.Ports[0].PublicPort : '....'}
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className={classes.buttonCell}>
                                     {row.State === 'running' ? (
                                         <Button
                                             onClick={() => this.stopContainer(row.Id)}
-                                            className={classes.button}
+                                            className={classes.buttonCell}
                                             variant="contained"
                                             color="secondary"
                                         >
@@ -120,14 +128,22 @@ class ContainersTable extends Component {
                                         <Button
                                             onClick={() => this.startContainer(row.Id)}
                                             variant="contained"
-                                            color="primary"
+                                            className={classes.greenButton}
                                         >
                                             <PlayArrow />
                                         </Button>
                                     )}
-                                    <Button onClick={() => this.restartContainer(row.Id)} variant="contained">
+                                </TableCell>
+                                <TableCell className={classes.buttonCell}>
+                                    <Button
+                                        color="primary"
+                                        onClick={() => this.restartContainer(row.Id)}
+                                        variant="contained"
+                                    >
                                         <AutoRenew />
                                     </Button>
+                                </TableCell>
+                                <TableCell className={classes.buttonCell}>
                                     <Button onClick={() => this.removeContainer(row.Id)} variant="contained">
                                         <Delete />
                                     </Button>
