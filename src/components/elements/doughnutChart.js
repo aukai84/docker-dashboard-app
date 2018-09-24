@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { PieChart, Pie, Legend, Tooltip, Cell } from 'Recharts'
+import { PieChart, Pie, Label, Tooltip, Cell } from 'Recharts'
 import Grid from '@material-ui/core/Grid'
 
 const styles = (theme) => ({
@@ -38,17 +38,17 @@ const styles = (theme) => ({
     pos: {
         marginBottom: 12,
     },
-    rotateChart: {
-        transform: 'rotate(-360deg)',
-    },
 })
 
 class DoughnutChart extends Component {
     constructor(props) {
         super(props)
     }
+
     render() {
+        console.log('donut data', this.props.chartData)
         const { classes } = this.props
+        const COLORS = ['#e5e5e5', '#00caca']
         return (
             <Card className={classes.card}>
                 <Grid container alignItems="center" justify="center">
@@ -65,7 +65,6 @@ class DoughnutChart extends Component {
                         </Grid>
                         <PieChart width={275} height={200}>
                             <Pie
-                                className={classes.rotateChart}
                                 data={this.props.chartData}
                                 dataKey="value"
                                 startAngle={-180}
@@ -74,7 +73,12 @@ class DoughnutChart extends Component {
                                 innerRadius={55}
                                 outerRadius={80}
                                 fill="#00caca"
-                            />
+                            >
+                                {this.props.chartData.map((entry, index) => (
+                                    <Cell fill={COLORS[index]} />
+                                ))}
+                                <Label value={Math.round(this.props.chartData[1].value) + '%'} position="center" />
+                            </Pie>
                             <Tooltip />
                         </PieChart>
                     </CardContent>
