@@ -12,7 +12,7 @@ const docker = require('./dockerapi')
 app.use(cors())
 app.use(express.static('./dist'))
 
-app.get('/*', (req, res, next) => res.sendFile(join(__dirname, 'dist/index.html')))
+app.get('/*', (req, res, next) => res.sendFile('dist/index.html'))
 
 server.listen(PORT, () => {
     console.log('Docker Dashboard Server running on port ', PORT)
@@ -79,13 +79,14 @@ function refreshNetworks() {
     })
 }
 
-function refreshContainerUsage(id) {
-    function calculatePercentage(cpu, preCpu, system, preSystem) {
-        let cpuDelta = cpu - preCpu
-        let systemDelta = system - preSystem
-        let usage = (cpuDelta / systemDelta) * 100
-        return usage
-    }
+function calculatePercentage(cpu, preCpu, system, preSystem) {
+    let cpuDelta = cpu - preCpu
+    let systemDelta = system - preSystem
+    let usage = (cpuDelta / systemDelta) * 100
+    return usage
+}
+
+function refreshContainerUsage() {
     docker.listContainers({ all: true }, (err, containers) => {
         if (containers) {
             containers.forEach((container) => {
@@ -118,43 +119,12 @@ function refreshContainerUsage(id) {
 }
 
 function refreshCpuUsage() {
-    function calculatePercentage(cpu, preCpu, system, preSystem) {
-        let cpuDelta = cpu - preCpu
-        let systemDelta = system - preSystem
-        let usage = (cpuDelta / systemDelta) * 100
-        return usage
-    }
     docker.listContainers({ all: true }, (err, containers) => {
-        if (containers && containers[0]) {
-            let dockerContainer = docker.getContainer(containers[0].Id)
-            dockerContainer.stats({ stream: false }, (err, res) => {
-                if (err) {
-                    console.log('error', err)
-                } else if (res) {
-                    let cpuStats = res.cpu_stats.cpu_usage.total_usage
-                    let preCpuStats = res.precpu_stats.cpu_usage.total_usage
-                    let systemCpuStats = res.cpu_stats.system_cpu_usage
-                    let systemPreCpuStats = res.precpu_stats.system_cpu_usage
-                    io.emit('cpu.usage', calculatePercentage(cpuStats, preCpuStats, systemCpuStats, systemPreCpuStats))
-                } else {
-                    io.emit('cpu.usage', 0)
-                }
-            })
-        } else {
-            io.emit('cpu.usage', 0)
+        if (containers) {
+            let totalUsage = containers.reduce((prev, current) => {})
         }
-        /*containers.forEach((container) => {
-            let dockerContainer = docker.getContainer(container.Id)
-            dockerContainer.stats({ stream: false }, (err, res) => {
-                cpuStats += res.cpu_stats.cpu_usage.total_usage
-                preCpuStats += res.precpu_stats.cpu_usage.total_usage
-                systemCpuStats += res.cpu_stats.system_cpu_usage
-                systemPreCpuStats += res.precpu_stats.system_cpu_usage
-            })
-        })*/
     })
 }
-
 setInterval(refreshCpuUsage, 2000)
 setInterval(refreshContainerUsage, 500)
 setInterval(refreshContainers, 2000)
