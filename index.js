@@ -12,7 +12,7 @@ const docker = require('./dockerapi')
 app.use(cors())
 app.use(express.static('./dist'))
 
-app.get('/*', (req, res, next) => res.sendFile('./dist/index.html'))
+app.get('/*', (req, res, next) => res.sendFile(join(__dirname, 'dist')))
 
 server.listen(PORT, () => {
     console.log('Docker Dashboard Server running on port ', PORT)
