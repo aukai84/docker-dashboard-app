@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 
-import express, { static } from 'express'
-import { join } from 'path'
+let express = require('express')
+let join = require('path').join
 let app = express()
 let server = require('http').Server(app)
 let io = require('socket.io')(server)
-import cors from 'cors'
+let cors = require('cors')
 const PORT = process.env.PORT || 8000
 
-import { getContainer, listContainers, listImages, listNetworks } from './dockerapi'
-
+const docker = require('./dockerapi')
 app.use(cors())
-app.use(static('./dist'))
+app.use(express.static('./dist'))
 
 app.get('/*', (req, res, next) => res.sendFile(join(__dirname, 'dist/index.html')))
 
