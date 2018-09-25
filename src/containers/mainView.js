@@ -16,7 +16,7 @@ class MainView extends Component {
                 <Route path="/" exact render={() => <Dashboard {...this.props} />} />
                 <Route path="/containers" render={() => <Containers containers={this.props.containers} />} />
                 <Route path="/images" render={() => <Images images={this.props.images} />} />
-                <Route path="/usage" component={Usage} />
+                <Route path="/usage" render={() => <Usage containers={this.props.containers} />} />
                 <Route path="/networks" render={() => <Networks networks={this.props.networks} />} />
             </Switch>
         )

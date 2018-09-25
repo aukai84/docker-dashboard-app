@@ -6,6 +6,7 @@
 
 html {
     zoom: 0.85;
+    min-height: 100vh;
 }
 
 body {

@@ -43,7 +43,13 @@ class Dashboard extends Component {
         })
     }
     render() {
-        let data = [{ name: 'Docker Data', value: 100 }]
+        let data = [
+            {
+                name: 'Docker Remaining Data',
+                value: 0,
+            },
+            { name: 'Docker Data', value: 100 },
+        ]
         const { classes } = this.props
         const { justify, direction, alignItems } = this.state
         return (
@@ -60,19 +66,43 @@ class Dashboard extends Component {
                     spacing={40}
                 >
                     <Grid item>
-                        <DoughnutChart chartData={data} length={this.props.containers.length} name="Containers" />
+                        <DoughnutChart
+                            displayLabel={false}
+                            chartData={data}
+                            header={this.props.containers.length}
+                            name="Containers"
+                            component="h1"
+                            classPick="count"
+                            label=""
+                        />
                     </Grid>
                     <Grid item>
-                        <DoughnutChart chartData={data} length={this.props.images.length} name="Images" />
+                        <DoughnutChart
+                            displayLabel={false}
+                            chartData={data}
+                            header={this.props.images.length}
+                            name="Images"
+                            component="h1"
+                            classPick="count"
+                            label=""
+                        />
                     </Grid>
                     <Grid item>
-                        <DoughnutChart chartData={data} length={this.props.networks.length} name="Networks" />
+                        <DoughnutChart
+                            displayLabel={false}
+                            chartData={data}
+                            header={this.props.networks.length}
+                            component="h1"
+                            name="Networks"
+                            classPick="count"
+                            label=""
+                        />
                     </Grid>
                     <Grid container direction={direction}>
                         <Typography variant="headline" className={classes.usage} component="h1">
                             CPU Usage
                         </Typography>
-                        <DashboardLineChart chartDat={this.props} />
+                        <DashboardLineChart chartData={this.props} />
                     </Grid>
                 </Grid>
             </div>

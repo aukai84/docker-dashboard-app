@@ -15,7 +15,9 @@ class Containers extends Component {
             { name: 'Status', value: 'Status' },
             { name: 'Image', value: 'Image' },
             { name: 'IP/PORT', value: 'Ports[0]' },
-            { name: '', value: 'actions' },
+            { name: '', value: 'start/stop' },
+            { name: '', value: 'refresh' },
+            { name: '', value: 'remove' },
         ]
         return (
             <div>

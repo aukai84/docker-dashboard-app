@@ -36,21 +36,6 @@ class App extends Component {
         socket.emit('containers.list')
         socket.emit('images.list')
         socket.emit('networks.list')
-        axios.get('http://localhost:8000/images/json').then((res) => {
-            this.setState({
-                images: res.data,
-            })
-        })
-        axios.get('http://localhost:8000/containers/').then((res) => {
-            this.setState({
-                containers: res.data,
-            })
-        })
-        axios.get('http://localhost:8000/networks').then((res) => {
-            this.setState({
-                networks: res.data,
-            })
-        })
     }
     render() {
         return (

@@ -22,9 +22,15 @@ class DashboardLineChart extends Component {
             data: [],
         }
         socket.on('cpu.usage', (usage) => {
-            this.setState({
-                data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
-            })
+            if (usage === 0 || !usage) {
+                this.setState({
+                    data: [{ time: 'No CPU Usage', cpu: 0 }],
+                })
+            } else {
+                this.setState({
+                    data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
+                })
+            }
         })
     }
 
