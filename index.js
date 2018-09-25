@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 let express = require('express')
+let open = require('open')
 let join = require('path').join
 let app = express()
 let server = require('http').Server(app)
@@ -15,6 +16,7 @@ app.get('/*', (req, res, next) => res.sendFile(join(__dirname, 'dist/index.html'
 
 server.listen(PORT, () => {
     console.log('Docker Dashboard Server running on port ', PORT)
+    open('http://localhost:8000')
 })
 
 io.on('connection', (socket) => {
