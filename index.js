@@ -6,13 +6,17 @@ let app = express()
 let server = require('http').Server(app)
 let io = require('socket.io')(server)
 let cors = require('cors')
+let serveStatic = require('serve-static')
 const PORT = process.env.PORT || 8000
 const docker = require('./dockerapi')
 
 app.use(cors())
-app.use(express.static('dist'))
 
-app.get('/*', (req, res, next) => res.sendFile(join(__dirname, 'dist/index.html')))
+app.use(express.static(join(__dirname, 'dist')))
+
+app.get('/*', (req, res, next) => {
+    res.sendFile(join(__dirname, 'dist/index.html'))
+})
 
 server.listen(PORT, () => {
     console.log('Docker Dashboard Server running on port ', PORT)
