@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography'
+import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
 import UsageDoughnutChart from '../elements/usageDoughnutChart.js'
 import * as io from 'socket.io-client'
 const API_URL = 'http://localhost:8000'
 let socket = io.connect(API_URL)
 
-const styles = (theme) => ({
+const styles = {
     root: {
-        marginTop: 32,
+        marginTop: 0,
     },
-})
+}
 class Usage extends Component {
     constructor(props) {
         super(props)
@@ -27,13 +29,14 @@ class Usage extends Component {
     }
 
     render() {
-        const classes = this.props
+        const { classes } = this.props
+        console.log('classes', classes)
         return (
             <div>
                 <Typography variant="headline" component="h1">
                     Usage
                 </Typography>
-                <Grid container className={classes.root} spacing={40}>
+                <Grid container spacing={40} className={classes.root}>
                     {this.props.containers.map((container) => {
                         return (
                             <UsageDoughnutChart
@@ -52,4 +55,8 @@ class Usage extends Component {
     }
 }
 
-export default Usage
+Usage.propTypes = {
+    classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(Usage)

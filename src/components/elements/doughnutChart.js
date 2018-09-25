@@ -46,7 +46,6 @@ class DoughnutChart extends Component {
     }
 
     render() {
-        console.log('donut data', this.props.chartData)
         const { classes } = this.props
         const COLORS = ['#e5e5e5', '#00caca']
         return (
@@ -67,7 +66,7 @@ class DoughnutChart extends Component {
                             <Pie
                                 data={this.props.chartData}
                                 dataKey="value"
-                                startAngle={-180}
+                                startAngle={-270}
                                 cx={'50%'}
                                 cy={'50%'}
                                 innerRadius={55}
@@ -77,7 +76,14 @@ class DoughnutChart extends Component {
                                 {this.props.chartData.map((entry, index) => (
                                     <Cell fill={COLORS[index]} />
                                 ))}
-                                <Label value={Math.round(this.props.chartData[1].value) + '%'} position="center" />
+                                {this.props.displayLabel ? (
+                                    <Label
+                                        value={Math.round(this.props.chartData[1].value).toString() + this.props.label}
+                                        position="center"
+                                    />
+                                ) : (
+                                    false
+                                )}
                             </Pie>
                             <Tooltip />
                         </PieChart>

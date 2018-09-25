@@ -43,7 +43,13 @@ class Dashboard extends Component {
         })
     }
     render() {
-        let data = [{ name: 'Docker Data', value: 100 }]
+        let data = [
+            {
+                name: 'Docker Remaining Data',
+                value: 0,
+            },
+            { name: 'Docker Data', value: 100 },
+        ]
         const { classes } = this.props
         const { justify, direction, alignItems } = this.state
         return (
@@ -61,29 +67,35 @@ class Dashboard extends Component {
                 >
                     <Grid item>
                         <DoughnutChart
+                            displayLabel={false}
                             chartData={data}
                             header={this.props.containers.length}
                             name="Containers"
                             component="h1"
                             classPick="count"
+                            label=""
                         />
                     </Grid>
                     <Grid item>
                         <DoughnutChart
+                            displayLabel={false}
                             chartData={data}
                             header={this.props.images.length}
                             name="Images"
                             component="h1"
                             classPick="count"
+                            label=""
                         />
                     </Grid>
                     <Grid item>
                         <DoughnutChart
+                            displayLabel={false}
                             chartData={data}
                             header={this.props.networks.length}
                             component="h1"
                             name="Networks"
                             classPick="count"
+                            label=""
                         />
                     </Grid>
                     <Grid container direction={direction}>

@@ -23,6 +23,7 @@ class UsageDoughnutChart extends Component {
         return (
             <Grid item>
                 <DoughnutChart
+                    displayLabel
                     name={this.props.name}
                     component={this.props.component}
                     classPick={this.props.classPick}
@@ -35,6 +36,7 @@ class UsageDoughnutChart extends Component {
                         },
                         { name: 'Docker Data', value: this.props.usage },
                     ]}
+                    label="%"
                 />
             </Grid>
         )
