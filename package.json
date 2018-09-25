@@ -10,8 +10,7 @@
         "build": "parcel build ./src/index.html",
         "precommit": "npm run format",
         "format": "prettier --config .prettierrc --write \"./src/**/*.js\"",
-        "prepublish": "rm -rf dist && npm run build",
-        "preinstall": "rm -rf dist"
+        "prepublish": "rm -rf dist && npm run build"
     },
     "bin": {
         "docker-dashboard": "./index.js"
