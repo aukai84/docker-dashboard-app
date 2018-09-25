@@ -5,12 +5,13 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
+        "clean": "rimraf dist",
         "dev": "parcel ./src/index.html",
         "start": "nodemon ./index.js",
         "build": "parcel build ./src/index.html",
         "precommit": "npm run format",
         "format": "prettier --config .prettierrc --write \"./src/**/*.js\"",
-        "prepublish": "rm -rf dist && npm run build"
+        "prepublish": "npm run clean && npm run build"
     },
     "bin": {
         "docker-dashboard": "./index.js"
@@ -68,6 +69,7 @@
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
         "recharts": "^1.2.0",
+        "rimraf": "^2.6.2",
         "socket.io-client": "^2.1.1"
     }
 }
