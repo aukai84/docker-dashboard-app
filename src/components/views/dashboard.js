@@ -69,7 +69,7 @@ class Dashboard extends Component {
                         <DoughnutChart
                             displayLabel={false}
                             chartData={data}
-                            header={this.props.containers.length}
+                            header={this.props.containers.length || 0}
                             name="Containers"
                             component="h1"
                             classPick="count"
@@ -80,7 +80,7 @@ class Dashboard extends Component {
                         <DoughnutChart
                             displayLabel={false}
                             chartData={data}
-                            header={this.props.images.length}
+                            header={this.props.images.length || 0}
                             name="Images"
                             component="h1"
                             classPick="count"
@@ -91,7 +91,7 @@ class Dashboard extends Component {
                         <DoughnutChart
                             displayLabel={false}
                             chartData={data}
-                            header={this.props.networks.length}
+                            header={this.props.networks.length || 0}
                             component="h1"
                             name="Networks"
                             classPick="count"
