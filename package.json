@@ -8,7 +8,7 @@
         "clean": "rimraf dist",
         "dev": "parcel ./src/index.html",
         "start": "nodemon ./index.js",
-        "build": "parcel build ./src/index.html",
+        "build": "parcel build ./src/index.html --no-cache",
         "precommit": "npm run format",
         "format": "prettier --config .prettierrc --write \"./src/**/*.js\"",
         "prepublish": "npm run clean && npm run build"
