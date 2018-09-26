@@ -30,7 +30,6 @@ class Usage extends Component {
 
     render() {
         const { classes } = this.props
-        console.log('classes', classes)
         return (
             <div>
                 <Typography variant="headline" component="h1">

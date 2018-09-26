@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer'
-import LineChart from 'recharts/lib/chart/LineChart'
-import Line from 'recharts/lib/cartesian/Line'
+import AreaChart from 'recharts/lib/chart/AreaChart'
+import Area from 'recharts/lib/cartesian/Area'
 import XAxis from 'recharts/lib/cartesian/XAxis'
 import YAxis from 'recharts/lib/cartesian/YAxis'
 import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid'
@@ -15,13 +15,12 @@ import { isMoment } from 'moment'
 const API_URL = 'http://localhost:8000'
 const socket = io.connect(API_URL)
 
-class DashboardLineChart extends Component {
+class DashboardAreaChart extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            data: [],
-        }
-        socket.on('cpu.usage', (usage) => {
+        this.state = {}
+        socket.on('container.usage', (usage) => {
+            console.log('cpu.usage', usage)
             if (usage === 0 || !usage) {
                 this.setState({
                     data: [{ time: 'No CPU Usage', cpu: 0 }],
@@ -41,17 +40,17 @@ class DashboardLineChart extends Component {
     render() {
         return (
             <ResponsiveContainer width="99%" height={320}>
-                <LineChart data={this.state.data}>
+                <AreaChart data={this.state.data}>
                     <XAxis dataKey="time" />
                     <YAxis />
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Line dot={false} type="monotone" dataKey="cpu" stroke="#00caca" />
-                </LineChart>
+                    <Area dot={false} type="monotone" dataKey="cpu" stroke="#00caca" />
+                </AreaChart>
             </ResponsiveContainer>
         )
     }
 }
 
-export default DashboardLineChart
+export default DashboardAreaChart
