@@ -5,12 +5,11 @@
 }
 
 html {
-    zoom: 0.85;
     min-height: 100vh;
 }
 
 body {
-    min-height: 100vh;
+    min-height: 100%;
     overflow-y: scroll;
     overflow-x: scroll;
     letter-spacing: 0.1rem;

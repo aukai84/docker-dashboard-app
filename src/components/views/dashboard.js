@@ -102,7 +102,7 @@ class Dashboard extends Component {
                         <Typography variant="headline" className={classes.usage} component="h1">
                             CPU Usage
                         </Typography>
-                        <DashboardLineChart chartData={this.props} />
+                        <DashboardLineChart chartData={this.props.containers} />
                     </Grid>
                 </Grid>
             </div>

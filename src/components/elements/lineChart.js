@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer'
-import AreaChart from 'recharts/lib/chart/AreaChart'
-import Area from 'recharts/lib/cartesian/Area'
+import LineChart from 'recharts/lib/chart/LineChart'
+import Line from 'recharts/lib/cartesian/Area'
 import XAxis from 'recharts/lib/cartesian/XAxis'
 import YAxis from 'recharts/lib/cartesian/YAxis'
 import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid'
@@ -15,42 +15,53 @@ import { isMoment } from 'moment'
 const API_URL = 'http://localhost:8000'
 const socket = io.connect(API_URL)
 
-class DashboardAreaChart extends Component {
+class DashboardLineChart extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
-        socket.on('container.usage', (usage) => {
-            console.log('cpu.usage', usage)
-            if (usage === 0 || !usage) {
+        this.state = {
+            data: [],
+            totalUsage: {},
+        }
+        socket.on('container.usage', (container) => {
+            if ((container && container.usage === 0) || !container) {
                 this.setState({
-                    data: [{ time: 'No CPU Usage', cpu: 0 }],
+                    data: this.props.chartData.map((container) => {
+                        return { time: 'No CPU Usage', [container.id]: 0 }
+                    }),
                 })
             } else {
                 this.setState({
-                    data: this.state.data.concat({ time: moment().format('mm:ss'), cpu: usage }),
+                    data: this.state.data.concat({
+                        time: moment().format('mm:ss'),
+                        [container.id]: container.usage,
+                    }),
                 })
             }
         })
     }
 
     componentDidMount() {
-        socket.emit('cpu.usage')
+        socket.emit('container.usage')
     }
 
     render() {
+        console.log('data', this.state.data)
         return (
             <ResponsiveContainer width="99%" height={320}>
-                <AreaChart data={this.state.data}>
+                <LineChart data={this.state.data}>
                     <XAxis dataKey="time" />
                     <YAxis />
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Area dot={false} type="monotone" dataKey="cpu" stroke="#00caca" />
-                </AreaChart>
+                    {this.props.chartData.map((container) => {
+                        console.log('container', container)
+                        return <Line dot={false} type="monotone" dataKey={container.Id} stroke="#00caca" />
+                    })}
+                </LineChart>
             </ResponsiveContainer>
         )
     }
 }
 
-export default DashboardAreaChart
+export default DashboardLineChart

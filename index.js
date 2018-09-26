@@ -6,6 +6,7 @@ let app = express()
 let server = require('http').Server(app)
 let io = require('socket.io')(server)
 let cors = require('cors')
+let moment = require('moment')
 let serveStatic = require('serve-static')
 const PORT = process.env.PORT || 8000
 const docker = require('./dockerapi')
@@ -93,36 +94,29 @@ function calculatePercentage({ cpuStats, preCpuStats, systemCpuStats, systemPreC
 function refreshContainerUsage() {
     docker.listContainers({ all: true }, (err, containers) => {
         if (containers) {
-            containers.forEach((container) => {
-                if (container) {
-                    let dockerContainer = docker.getContainer(container.Id)
-                    dockerContainer.stats({ stream: false }, (err, res) => {
-                        if (err) {
-                            console.log(err)
-                        } else if (res) {
-                            let cpuStats = res.cpu_stats.cpu_usage.total_usage
-                            let preCpuStats = res.precpu_stats.cpu_usage.total_usage
-                            let systemCpuStats = res.cpu_stats.system_cpu_usage
-                            let systemPreCpuStats = res.precpu_stats.system_cpu_usage
-                            io.emit('container.usage', {
-                                id: container.Id,
-                                usage: calculatePercentage({
-                                    cpuStats,
-                                    preCpuStats,
-                                    systemCpuStats,
-                                    systemPreCpuStats,
-                                }),
+            let totalContainerUsage = containers.reduce((agg, container) => {
+                let dockerContainer = docker.getContainer(container.Id)
+                dockerContainer.stats({ stream: false }, (err, res) => {
+                    if (err) {
+                        console.log(err)
+                    } else if (res) {
+                        let cpuStats = res.cpu_stats.cpu_usage.total_usage
+                        let preCpuStats = res.precpu_stats.cpu_usage.total_usage
+                        let systemCpuStats = res.cpu_stats.system_cpu_usage
+                        let systemPreCpuStats = res.precpu_stats.system_cpu_usage
+                        if (!agg[container.Names[0].substr(1)]) {
+                            agg[container.Names[0].substr(1)] = calculatePercentage({
+                                cpuStats,
+                                preCpuStats,
+                                systemCpuStats,
+                                systemPreCpuStats,
                             })
-                        } else {
-                            io.emit('container.usage', { id: '', usage: 0 })
                         }
-                    })
-                } else {
-                    io.emit('container.usage', { id: '', usage: 0 })
-                }
-            })
-        } else {
-            io.emit('container.usage', { id: '', usage: 0 })
+                        return agg
+                    }
+                })
+            }, {})
+            io.emit('container.usage', totalContainerUsage)
         }
     })
 }
