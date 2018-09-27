@@ -6,6 +6,12 @@ import Images from '../components/views/images.js'
 import Usage from '../components/views/usage.js'
 import Networks from '../components/views/networks.js'
 
+const styles = {
+    root: {
+        zoom: 0.85,
+    },
+}
+
 class MainView extends Component {
     constructor(props) {
         super(props)

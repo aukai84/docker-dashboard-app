@@ -28,7 +28,6 @@ class UsageDoughnutChart extends Component {
                     component={this.props.component}
                     classPick={this.props.classPick}
                     header={this.props.header}
-                    Id={this.props.Id}
                     chartData={[
                         {
                             name: 'Remaining Usage',

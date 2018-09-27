@@ -4,6 +4,11 @@ import DashboardLineChart from '../elements/lineChart.js'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core'
+import * as io from 'socket.io-client'
+import moment from 'moment'
+import { isMoment } from 'moment'
+const API_URL = 'http://localhost:8000'
+const socket = io.connect(API_URL)
 
 const styles = (theme) => ({
     root: {
@@ -29,18 +34,23 @@ class Dashboard extends Component {
             direction: 'row',
             justify: 'center',
             alignItems: 'center',
-            containers: [],
+            data: [],
+            totalUsage: 0,
         }
+        socket.on('container.usage', (container) => {
+            if (container) {
+                container.time = moment().format('mm:ss')
+                let arrayCopy = Array.from(this.state.data)
+                arrayCopy.push(container)
+                this.setState({
+                    totalUsage: container.totalUsage,
+                    data: arrayCopy,
+                })
+            }
+        })
     }
     componentDidMount() {
-        this.setState({
-            containers: this.props.containers.map((container) => {
-                return {
-                    name: container.Names[0].substr(1),
-                    value: 1,
-                }
-            }),
-        })
+        socket.emit('container.usage')
     }
     render() {
         let data = [
@@ -67,13 +77,19 @@ class Dashboard extends Component {
                 >
                     <Grid item>
                         <DoughnutChart
-                            displayLabel={false}
-                            chartData={data}
+                            displayLabel
+                            chartData={[
+                                {
+                                    name: 'Remaining Usage',
+                                    value: 100 - this.state.totalUsage,
+                                },
+                                { name: 'Docker Data', value: this.state.totalUsage },
+                            ]}
+                            label="%"
                             header={this.props.containers.length || 0}
                             name="Containers"
                             component="h1"
                             classPick="count"
-                            label=""
                         />
                     </Grid>
                     <Grid item>
@@ -102,7 +118,7 @@ class Dashboard extends Component {
                         <Typography variant="headline" className={classes.usage} component="h1">
                             CPU Usage
                         </Typography>
-                        <DashboardLineChart chartData={this.props.containers} />
+                        <DashboardLineChart containers={this.props.containers} data={this.state.data} />
                     </Grid>
                 </Grid>
             </div>

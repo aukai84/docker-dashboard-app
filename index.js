@@ -102,6 +102,16 @@ async function refreshContainerUsage() {
             let systemCpuStats = res.cpu_stats.system_cpu_usage
             let systemPreCpuStats = res.precpu_stats.system_cpu_usage
             const resolvedAgg = await agg
+            if (!resolvedAgg.totalUsage) {
+                resolvedAgg.totalUsage = 0
+            }
+            resolvedAgg.totalUsage += calculatePercentage({
+                cpuStats,
+                preCpuStats,
+                systemCpuStats,
+                systemPreCpuStats,
+            })
+
             if (!resolvedAgg[container.Names[0].substr(1)]) {
                 resolvedAgg[container.Names[0].substr(1)] = calculatePercentage({
                     cpuStats,
@@ -112,7 +122,6 @@ async function refreshContainerUsage() {
             }
             return resolvedAgg
         }, {})
-        console.log('c usage', containersUsage)
         io.emit('container.usage', containersUsage)
     }
 }

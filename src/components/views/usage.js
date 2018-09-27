@@ -16,10 +16,12 @@ const styles = {
 class Usage extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            usage: {},
+        }
         socket.on('container.usage', (usage) => {
             this.setState({
-                [usage.id]: usage.usage,
+                usage: usage,
             })
         })
     }
@@ -29,6 +31,7 @@ class Usage extends Component {
     }
 
     render() {
+        console.log('usage', this.state.usage)
         const { classes } = this.props
         return (
             <div>
@@ -39,12 +42,11 @@ class Usage extends Component {
                     {this.props.containers.map((container) => {
                         return (
                             <UsageDoughnutChart
-                                usage={this.state[container.Id]}
+                                usage={this.state.usage[container.Names[0].substr(1)]}
                                 name="Container"
                                 component="p"
                                 classPick="usageChart"
                                 header={container.Names[0].substr(1)}
-                                Id={container.Id}
                             />
                         )
                     })}
