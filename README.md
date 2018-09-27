@@ -2,16 +2,17 @@
 
 A simple, local web application serving your host machines Docker information
 
-![](dashboard.gif)
-
 Features include:
 
 -   Container, Image,and Network details
+
+![](dashboard.gif)
+
 -   Live update of CPU Usage
 
 ![](usage.gif)
 
--   Start/Stop Docker Containers
+-   Start/Stop/Restart/Remove Docker Containers
 
 ![](containers.gif)
 

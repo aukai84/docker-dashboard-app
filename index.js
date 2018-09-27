@@ -6,7 +6,6 @@ let app = express()
 let server = require('http').Server(app)
 let io = require('socket.io')(server)
 let cors = require('cors')
-let moment = require('moment')
 let serveStatic = require('serve-static')
 const PORT = process.env.PORT || 8000
 const docker = require('./dockerapi')
