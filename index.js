@@ -20,7 +20,7 @@ app.get('/*', (req, res, next) => {
 
 server.listen(PORT, () => {
     console.log('Docker Dashboard Server running on port ', PORT)
-    //open('http://localhost:8000')
+    open('http://localhost:8000')
 })
 
 io.on('connection', (socket) => {
