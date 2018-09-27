@@ -6,7 +6,6 @@ let app = express()
 let server = require('http').Server(app)
 let io = require('socket.io')(server)
 let cors = require('cors')
-let serveStatic = require('serve-static')
 const PORT = process.env.PORT || 8000
 const docker = require('./dockerapi')
 
@@ -96,30 +95,32 @@ async function refreshContainerUsage() {
         let containersUsage = await containers.reduce(async (agg, container) => {
             let dockerContainer = docker.getContainer(container.Id)
             let res = await dockerContainer.stats({ stream: false })
-            let cpuStats = res.cpu_stats.cpu_usage.total_usage
-            let preCpuStats = res.precpu_stats.cpu_usage.total_usage
-            let systemCpuStats = res.cpu_stats.system_cpu_usage
-            let systemPreCpuStats = res.precpu_stats.system_cpu_usage
-            const resolvedAgg = await agg
-            if (!resolvedAgg.totalUsage) {
-                resolvedAgg.totalUsage = 0
-            }
-            resolvedAgg.totalUsage += calculatePercentage({
-                cpuStats,
-                preCpuStats,
-                systemCpuStats,
-                systemPreCpuStats,
-            })
-
-            if (!resolvedAgg[container.Names[0].substr(1)]) {
-                resolvedAgg[container.Names[0].substr(1)] = calculatePercentage({
+            if (res) {
+                let cpuStats = res.cpu_stats.cpu_usage.total_usage
+                let preCpuStats = res.precpu_stats.cpu_usage.total_usage
+                let systemCpuStats = res.cpu_stats.system_cpu_usage
+                let systemPreCpuStats = res.precpu_stats.system_cpu_usage
+                const resolvedAgg = await agg
+                if (!resolvedAgg.totalUsage) {
+                    resolvedAgg.totalUsage = 0
+                }
+                resolvedAgg.totalUsage += calculatePercentage({
                     cpuStats,
                     preCpuStats,
                     systemCpuStats,
                     systemPreCpuStats,
                 })
+
+                if (!resolvedAgg[container.Names[0].substr(1)]) {
+                    resolvedAgg[container.Names[0].substr(1)] = calculatePercentage({
+                        cpuStats,
+                        preCpuStats,
+                        systemCpuStats,
+                        systemPreCpuStats,
+                    })
+                }
+                return resolvedAgg
             }
-            return resolvedAgg
         }, {})
         io.emit('container.usage', containersUsage)
     }
@@ -158,7 +159,7 @@ async function refreshContainerUsage() {
     })
 }*/
 //setInterval(refreshCpuUsage, 2000)
-setInterval(refreshContainerUsage, 2000)
+setInterval(refreshContainerUsage, 2500)
 setInterval(refreshContainers, 2000)
 setInterval(refreshImages, 2000)
 setInterval(refreshNetworks, 2000)
