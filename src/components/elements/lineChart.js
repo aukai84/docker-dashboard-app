@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer'
 import LineChart from 'recharts/lib/chart/LineChart'
-import Line from 'recharts/lib/cartesian/Area'
+import Line from 'recharts/lib/cartesian/Line'
 import XAxis from 'recharts/lib/cartesian/XAxis'
 import YAxis from 'recharts/lib/cartesian/YAxis'
 import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid'
@@ -20,21 +20,14 @@ class DashboardLineChart extends Component {
         super(props)
         this.state = {
             data: [],
-            totalUsage: {},
         }
         socket.on('container.usage', (container) => {
-            if ((container && container.usage === 0) || !container) {
+            if (container) {
+                container.time = moment().format('mm:ss')
+                let arrayCopy = Array.from(this.state.data)
+                arrayCopy.push(container)
                 this.setState({
-                    data: this.props.chartData.map((container) => {
-                        return { time: 'No CPU Usage', [container.id]: 0 }
-                    }),
-                })
-            } else {
-                this.setState({
-                    data: this.state.data.concat({
-                        time: moment().format('mm:ss'),
-                        [container.id]: container.usage,
-                    }),
+                    data: arrayCopy,
                 })
             }
         })
@@ -45,7 +38,7 @@ class DashboardLineChart extends Component {
     }
 
     render() {
-        console.log('data', this.state.data)
+        const COLORS = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4']
         return (
             <ResponsiveContainer width="99%" height={320}>
                 <LineChart data={this.state.data}>
@@ -54,9 +47,16 @@ class DashboardLineChart extends Component {
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    {this.props.chartData.map((container) => {
-                        console.log('container', container)
-                        return <Line dot={false} type="monotone" dataKey={container.Id} stroke="#00caca" />
+                    {this.props.chartData.map((container, i) => {
+                        console.log('container name', container.Names[0].substr(1))
+                        return (
+                            <Line
+                                dot={false}
+                                type="monotone"
+                                dataKey={container.Names[0].substr(1)}
+                                stroke={COLORS[i]}
+                            />
+                        )
                     })}
                 </LineChart>
             </ResponsiveContainer>
