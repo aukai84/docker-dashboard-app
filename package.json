@@ -42,7 +42,6 @@
         "lodash": "^4.17.11",
         "open": "0.0.5",
         "path": "^0.12.7",
-        "serve-static": "^1.13.2",
         "socket.io": "^2.1.1"
     },
     "devDependencies": {
