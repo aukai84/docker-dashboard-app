@@ -31,7 +31,6 @@ class Usage extends Component {
     }
 
     render() {
-        console.log('usage', this.state.usage)
         const { classes } = this.props
         return (
             <div>

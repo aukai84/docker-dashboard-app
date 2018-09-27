@@ -24,7 +24,6 @@ class DashboardLineChart extends Component {
                     <Tooltip />
                     <Legend />
                     {this.props.containers.map((container, i) => {
-                        console.log('container name', container.Names[0].substr(1))
                         return (
                             <Line
                                 dot={false}
